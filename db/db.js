@@ -1,6 +1,7 @@
-import * as SQLite from 'expo-sqlite'
+import SQLite from 'react-native-sqlite-storage';
 import Toast from "react-native-toast-message"
-const db = SQLite.openDatabase('notesApp.db');
+
+const db = SQLite.openDatabase({ name: 'notesApp.db', location: 'default' });
 
 export const initializeDatabase = () => {
     const promise = new Promise((resolve, reject) => {
@@ -24,7 +25,7 @@ export const initializeDatabase = () => {
     return promise;
 };
 
-export const insertNotes = (title, description, color) => {
+export const insertNotes = async (title, description, color) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
@@ -41,7 +42,7 @@ export const insertNotes = (title, description, color) => {
     });
     return promise;
 };
-export const fetchNotes = () => {
+export const fetchNotes = async () => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(
@@ -58,7 +59,34 @@ export const fetchNotes = () => {
     });
     return promise;
 };
-export const deleteNote = (id) => {
+
+export const fetchNotes1 = async () => {
+    const promise = new Promise((resolve, reject) => {
+
+        // SELECT QUERY
+        db.transaction((tx) => {
+            tx.executeSql('SELECT * FROM notes',
+                [],
+                (_, results) => {
+                    const len = results.rows.length;
+                    console.log('Query successful');
+                    for (let i = 0; i < len; i++) {
+                        const row = results.rows.item(i);
+                        console.log(`Note ID: ${row.id}, Title: ${row.title}, Description: ${row.description}, Color: ${row.color}`);
+                    }
+                    resolve(results.rows);
+                },
+                (_, error) => {
+                    console.error('Error selecting data:', error);
+                    reject(error);
+                });
+
+        });
+    });
+    return promise;
+}
+
+export const deleteNote = async (id) => {
     const promise = new Promise((resolve, reject) => {
         db.transaction(tx => {
             tx.executeSql(

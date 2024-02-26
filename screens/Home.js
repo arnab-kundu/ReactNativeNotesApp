@@ -3,16 +3,18 @@ import { StyleSheet, Text, View, Pressable, TextInput, FlatList } from 'react-na
 import { useIsFocused } from "@react-navigation/native"
 import Icon from "react-native-vector-icons/Ionicons"
 import Note from '../components/Note'
-import { fetchNotes } from '../db/db'
+import { deleteNote, fetchNotes, fetchNotes1 } from '../db/db'
 const Home = ({ navigation }) => {
     const [notes, setNotes] = useState([])
     const [text, setText] = useState("")
     const isFocused = useIsFocused();
     const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(text.toLowerCase()) || note.description.toLowerCase().includes(text.toLowerCase()))
 
-    useEffect(async () => {
-        const { rows } = await fetchNotes()
-        setNotes(rows._array)
+    useEffect(() => {
+        const { rows } = fetchNotes1()
+        deleteNote(1)
+       // console.warn("Saved Notes: " + rows)
+        //setNotes(rows._array)
     }, [isFocused])
     return (
         <View style={styles.container}>

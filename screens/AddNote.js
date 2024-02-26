@@ -32,10 +32,10 @@ const AddNote = ({ navigation }) => {
         }
         return error
     }
-    useEffect(async () => {
+    useEffect(() => {
         if (Object.keys(error).length === 0 && textValidated) {
             console.log("uploaded")
-            const ifData = await insertNotes(title, description, color)
+            const ifData = insertNotes(title, description, color)
             Toast.show({
                 type: "success",
                 text1: "Your note has been created 👋"
