@@ -5,6 +5,7 @@ import HeaderBtn from "react-native-vector-icons/Ionicons"
 import Toast from 'react-native-toast-message';
 import { colors } from '../data'
 import { insertNotes } from '../db/db'
+
 const AddNote = ({ navigation }) => {
     const [selectedIndex, setSelectedIndex] = useState(0)
     const [title, setTitle] = useState("")

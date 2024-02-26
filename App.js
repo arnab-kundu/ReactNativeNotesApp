@@ -1,8 +1,6 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useFonts } from 'expo-font';
-//import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
 import Home from './screens/Home';
 import Detail from './screens/DetailNote';
 import AddNote from './screens/AddNote';

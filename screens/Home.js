@@ -2,19 +2,40 @@ import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, Pressable, TextInput, FlatList } from 'react-native'
 import { useIsFocused } from "@react-navigation/native"
 import Icon from "react-native-vector-icons/Ionicons"
+
 import Note from '../components/Note'
-import { deleteNote, fetchNotes, fetchNotes1 } from '../db/db'
+import { fetchNotes } from '../db/db'
+
 const Home = ({ navigation }) => {
     const [notes, setNotes] = useState([])
     const [text, setText] = useState("")
     const isFocused = useIsFocused();
-    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(text.toLowerCase()) || note.description.toLowerCase().includes(text.toLowerCase()))
+    // const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(text.toLowerCase()) || note.description.toLowerCase().includes(text.toLowerCase()))
 
     useEffect(() => {
-        const { rows } = fetchNotes1()
-        deleteNote(1)
-       // console.warn("Saved Notes: " + rows)
-        //setNotes(rows._array)
+        // Use the Promise to fetch data
+        // https://dykraf.com/blog/how-to-use-promise-in-reactjs-useeffect
+        fetchNotes()
+            .then((results) => {
+                var notes_array = [];
+
+                const len = results.rows.length;
+                for (let i = 0; i < len; i++) {
+                    const row = results.rows.item(i);
+                    var note = { id: row.id, title: row.title, description: row.description, color: row.color }
+                    notes_array.push(note);
+
+                    //console.log(`Note ID: ${row.id}, Title: ${row.title}, Description: ${row.description}, Color: ${row.color}`);
+                }
+                setNotes(notes_array)
+                //setLoading(false)
+            })
+            .catch((error) => {
+                console.warn(error)
+
+                //setError(error)
+                //setLoading(false)
+            })
     }, [isFocused])
     return (
         <View style={styles.container}>
@@ -30,7 +51,7 @@ const Home = ({ navigation }) => {
                 <Icon name='search-outline' size={25} color={"grey"} />
                 <TextInput value={text} onChangeText={(e) => setText(e)} style={styles.input} placeholder='Search Your Notes' />
             </View>
-            <FlatList showsVerticalScrollIndicator={false} data={filteredNotes} renderItem={({ item }) => (
+            <FlatList showsVerticalScrollIndicator={false} data={notes} renderItem={({ item }) => (
                 <Note note={item} navigation={navigation} />
             )} />
         </View>

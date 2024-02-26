@@ -28,7 +28,7 @@ const DetailNote = ({ route, navigation }) => {
                         <Icon name='arrow-back' size={24} color={"#fff"} />
                     </View>
                 </Pressable>
-                <Pressable onPress={deleteNoteHandler}>
+                <Pressable onPress={() => deleteNoteHandler()}>
                     <View style={{ ...styles.iconContainer, backgroundColor: "#fff" }}>
                         <Delete name='delete' size={24} color={"red"} />
                     </View>
