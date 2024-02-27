@@ -10,7 +10,7 @@ const Home = ({ navigation }) => {
     const [notes, setNotes] = useState([])
     const [text, setText] = useState("")
     const isFocused = useIsFocused();
-    // const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(text.toLowerCase()) || note.description.toLowerCase().includes(text.toLowerCase()))
+    const filteredNotes = notes.filter((note) => note.title.toLowerCase().includes(text.toLowerCase()) || note.description.toLowerCase().includes(text.toLowerCase()))
 
     useEffect(() => {
         // Use the Promise to fetch data
@@ -49,9 +49,9 @@ const Home = ({ navigation }) => {
             </View>
             <View style={styles.inputContainer}>
                 <Icon name='search-outline' size={25} color={"grey"} />
-                <TextInput value={text} onChangeText={(e) => setText(e)} style={styles.input} placeholder='Search Your Notes' />
+                <TextInput value={text} onChangeText={(e) => setText(e)} style={styles.input} placeholder='Search Your Notes' returnKeyType='search' />
             </View>
-            <FlatList showsVerticalScrollIndicator={false} data={notes} renderItem={({ item }) => (
+            <FlatList showsVerticalScrollIndicator={false} data={filteredNotes} renderItem={({ item }) => (
                 <Note note={item} navigation={navigation} />
             )} />
         </View>

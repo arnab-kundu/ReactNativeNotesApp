@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, Pressable } from 'react-native'
+import { TouchableWithoutFeedback, Keyboard } from 'react-native' // For iOS Keyboard close
 import Icon from "react-native-vector-icons/MaterialIcons"
 import HeaderBtn from "react-native-vector-icons/Ionicons"
 import Toast from 'react-native-toast-message';
@@ -47,53 +48,55 @@ const AddNote = ({ navigation }) => {
         }
     }, [error, textValidated])
     return (
-        <View style={styles.container}>
-            <View style={{ flexDirection: "row", alignItems: "center", }}>
-                <Pressable onPress={() => navigation.navigate("Home")}>
-                    <View style={styles.iconContainer}>
-                        <HeaderBtn name='arrow-back' size={24} color={"#fff"} />
-                    </View>
-                </Pressable>
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss}>
+            <View style={styles.container}>
+                <View style={{ flexDirection: "row", alignItems: "center", }}>
+                    <Pressable onPress={() => navigation.navigate("Home")}>
+                        <View style={styles.iconContainer}>
+                            <HeaderBtn name='arrow-back' size={24} color={"#fff"} />
+                        </View>
+                    </Pressable>
 
-                <Text style={{ textAlign: "center", fontFamily: "Poppins", fontSize: 18, flex: 1 }}>Add A New Note</Text>
+                    <Text style={{ textAlign: "center", fontFamily: "Poppins", fontSize: 18, flex: 1 }}>Add A New Note</Text>
+                </View>
+
+
+                <View style={styles.formContainer}>
+                    <View style={{ marginBottom: 20 }}>
+                        <View style={{ ...styles.inputContainer, borderWidth: error.title ? 1 : 0 }}>
+                            <Icon name='title' size={25} color={"grey"} />
+                            <TextInput value={title} onChangeText={(e) => setTitle(e)} multiline={true} onKeyPress={() => setError({ ...error, title: null })} placeholder='Enter Your Note Title' style={styles.input} returnKeyType='next' />
+                        </View>
+                        {error.title && <Text style={styles.error}>{error.title}</Text>}
+                    </View>
+                    <View style={{ marginBottom: 20 }}>
+
+                        <View style={{ ...styles.inputContainer, borderWidth: error.description ? 1 : 0 }}>
+                            <Icon name='description' size={25} color={"grey"} />
+                            <TextInput value={description} onChangeText={(e) => setDescription(e)} on multiline={true} onKeyPress={() => setError({ ...error, description: null })} placeholder='Enter Your Note Description' style={styles.input} returnKeyType='done' />
+                        </View>
+                        {error.description && <Text style={styles.error}>{error.description}</Text>}
+
+                    </View>
+                    <View style={{ marginVertical: 20 }}>
+
+                        <View style={{ flexDirection: "row", }}>
+                            {colors.map((col, index) => (
+                                <TouchableOpacity key={index} onPress={() => { setSelectedIndex(index); setColor(col.color) }} >
+                                    <View key={col.id} style={{ ...styles.colorBox, backgroundColor: col.color, borderWidth: index === selectedIndex ? 2 : 0 }} />
+                                </TouchableOpacity>
+                            )
+                            )}
+                        </View>
+                        {error.color && <Text style={styles.error}>{error.color}</Text>}
+                    </View>
+                    <TouchableOpacity style={styles.btn} onPress={uploadNotes}>
+                        <Text style={{ color: "#fff", fontSize: 16 }}>Upload</Text>
+                    </TouchableOpacity>
+                </View>
+                <Toast />
             </View>
-
-
-            <View style={styles.formContainer}>
-                <View style={{ marginBottom: 20 }}>
-                    <View style={{ ...styles.inputContainer, borderWidth: error.title ? 1 : 0 }}>
-                        <Icon name='title' size={25} color={"grey"} />
-                        <TextInput value={title} onChangeText={(e) => setTitle(e)} multiline={true} onKeyPress={() => setError({ ...error, title: null })} placeholder='Enter Your Note Title' style={styles.input} />
-                    </View>
-                    {error.title && <Text style={styles.error}>{error.title}</Text>}
-                </View>
-                <View style={{ marginBottom: 20 }}>
-
-                    <View style={{ ...styles.inputContainer, borderWidth: error.description ? 1 : 0 }}>
-                        <Icon name='description' size={25} color={"grey"} />
-                        <TextInput value={description} onChangeText={(e) => setDescription(e)} on multiline={true} onKeyPress={() => setError({ ...error, description: null })} placeholder='Enter Your Note Description' style={styles.input} />
-                    </View>
-                    {error.description && <Text style={styles.error}>{error.description}</Text>}
-
-                </View>
-                <View style={{ marginVertical: 20 }}>
-
-                    <View style={{ flexDirection: "row", }}>
-                        {colors.map((col, index) => (
-                            <TouchableOpacity key={index} onPress={() => { setSelectedIndex(index); setColor(col.color) }} >
-                                <View key={col.id} style={{ ...styles.colorBox, backgroundColor: col.color, borderWidth: index === selectedIndex ? 2 : 0 }} />
-                            </TouchableOpacity>
-                        )
-                        )}
-                    </View>
-                    {error.color && <Text style={styles.error}>{error.color}</Text>}
-                </View>
-                <TouchableOpacity style={styles.btn} onPress={uploadNotes}>
-                    <Text style={{ color: "#fff", fontSize: 16 }}>Upload</Text>
-                </TouchableOpacity>
-            </View>
-            <Toast />
-        </View>
+        </TouchableWithoutFeedback>
     )
 }
 
