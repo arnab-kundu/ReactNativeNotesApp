@@ -108,4 +108,4 @@ To learn more about React Native, take a look at the following resources:
 
 ## Screenshots
 
-<img src="./screenshots/Screenshot_dashboard.png" alt="Dashboard" width="150"/><img src="./screenshots/Screenshot_search.png" alt="Search" width="150"/><img src="./screenshots/Screenshot_add_new.png" alt="Add new note" width="150"/><img src="./screenshots/Screenshot_delete_view.png" alt="View and delete" width="150"/>
+<img src="./screenshots/Screenshot_dashboard.png" alt="Dashboard" width="150"/> <img src="./screenshots/Screenshot_search.png" alt="Search" width="150"/> <img src="./screenshots/Screenshot_add_new.png" alt="Add new note" width="150"/> <img src="./screenshots/Screenshot_delete_view.png" alt="View and delete" width="150"/>
