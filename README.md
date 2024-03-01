@@ -77,3 +77,31 @@ To learn more about React Native, take a look at the following resources:
 - [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
 - [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
 - [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+
+## How to run
+ - Clone this git repo
+ - Run `cd socal-app`
+ - Run `npm i` to install all required node modules
+ - add your SDK location in `local.properties` file for Android
+ - Run `npm start` flowed by press `a` to run in Android
+ - Run `cd ios` then `pod install` to install all pods for iOS
+ - Run `npm start` flowed by press `i` to run in iOS
+
+ ## How to check ReactNative environment setup
+ - Run `react-native doctor` to diagonosis or fix any problem.
+
+ ## How to create Release build in Android
+ - Run `cd socal-app`
+ - Run `cd android`
+ - Run `./gradlew assembleRelease` or `./gradlew assemblerelease`
+
+ ## How to create a new project
+ - Run `npx react-native@latest init <your_project_name>`
+ - Project name should not contains any spaces.
+ - Use camelcase or use underscore in your project name
+
+ ## How to install or upgrade node modules
+- Run `npm install` or `npm i` to install all node modules in `package.json`
+- Run `npm audit`, `npm audit fix` or `npm audit fix -force`, `npm audit fix --force` to upgrade node modules
+- Run `npm i react-native@latest --save` to add and install new node module dependency
+- Search any node module here: https://www.npmjs.com/
