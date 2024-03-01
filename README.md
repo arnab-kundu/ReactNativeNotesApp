@@ -80,7 +80,7 @@ To learn more about React Native, take a look at the following resources:
 
 ## How to run
  - Clone this git repo
- - Run `cd socal-app`
+ - Run `cd ReactNativeNotesApp`
  - Run `npm i` to install all required node modules
  - add your SDK location in `local.properties` file for Android
  - Run `npm start` flowed by press `a` to run in Android
@@ -91,7 +91,7 @@ To learn more about React Native, take a look at the following resources:
  - Run `react-native doctor` to diagonosis or fix any problem.
 
  ## How to create Release build in Android
- - Run `cd socal-app`
+ - Run `cd ReactNativeNotesApp`
  - Run `cd android`
  - Run `./gradlew assembleRelease` or `./gradlew assemblerelease`
 
@@ -105,3 +105,10 @@ To learn more about React Native, take a look at the following resources:
 - Run `npm audit`, `npm audit fix` or `npm audit fix -force`, `npm audit fix --force` to upgrade node modules
 - Run `npm i react-native@latest --save` to add and install new node module dependency
 - Search any node module here: https://www.npmjs.com/
+
+## Screenshots
+
+<img src="./screenshots/Screenshot_dashboard.png" alt="Dashboard" width="150"/>
+<img src="./screenshots/Screenshot_search.png" alt="Search" width="150"/>
+<img src="./screenshots/Screenshot_add_new.png" alt="Add new note" width="150"/>
+<img src="./screenshots/Screenshot_delete_view.png" alt="View and delete" width="150"/>
