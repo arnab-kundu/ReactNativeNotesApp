@@ -102,6 +102,7 @@ To learn more about React Native, take a look at the following resources:
 
  ## How to install or upgrade node modules
 - Run `npm install` or `npm i` to install all node modules in `package.json`
+- Run `npx npm-check-updates -u` to update all dependency versions in `package.json` and then `npm i` to install
 - Run `npm audit`, `npm audit fix` or `npm audit fix -force`, `npm audit fix --force` to upgrade node modules
 - Run `npm i react-native@latest --save` to add and install new node module dependency
 - Search any node module here: https://www.npmjs.com/
