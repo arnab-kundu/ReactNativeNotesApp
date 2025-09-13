@@ -3,7 +3,7 @@ name: "Build iOS app"
 on:
   push:
     branches:
-      - master
+      - master-disabled-pipeline
 
 jobs:
   build_with_signing:
