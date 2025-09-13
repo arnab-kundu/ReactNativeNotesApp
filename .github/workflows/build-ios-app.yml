@@ -98,7 +98,7 @@ jobs:
           xcodebuild -exportArchive -archivePath $RUNNER_TEMP/your_app.xcarchive -exportOptionsPlist $EXPORT_OPTS_PATH -exportPath $RUNNER_TEMP/build          
 
       - name: Upload application
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: app
           path: ${{ runner.temp }}/build
